@@ -1,0 +1,4 @@
+easy_admin:
+    entities:
+        SkillCategory:
+            class: App\Entity\SkillCategory

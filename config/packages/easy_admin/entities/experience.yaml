@@ -1,0 +1,18 @@
+easy_admin:
+    entities:
+        Experience:
+            class: App\Entity\Experience
+            list:
+                fields:
+                    - 'position'
+                    - 'place'
+                    - { property: 'fromDate', format: 'm/Y' }
+                    - { property: 'toDate', format: 'm/Y' }
+                    - 'description'
+            form:
+                fields:
+                 - { property: 'position', css_class: 'large' }
+                 - 'place'
+                 - { property: 'fromDate', type: 'App\Admin\Field\DateType'}
+                 - { property: 'toDate', type: 'App\Admin\Field\DateType'}
+                 - 'description'

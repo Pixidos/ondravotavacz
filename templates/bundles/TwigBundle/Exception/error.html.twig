@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ status_code }} Something is wrong{% endblock %}
+{% block content %}
+    <section id="error" class="section">
+        <div class="container">
+            <!-- Profile Picture [Square] -->
+            <div id="profile" class="center-block">
+                <img src="/images/profile-pic.png">
+            </div>
+            <div id="error-div" class="card content-wrapper">
+
+                <div class="text-center">
+                    <h2>{% block errtext %}Something is wrong{% endblock %}</h2>
+                </div>
+                <div class="row">
+                    <!-- Download & Contact Button -->
+                    <div class="col col-xs-12 col-sm-12 col-md-12 text-center">
+                        <a href="{{ path('homepage') }}" class="btn btn-default">back to homepage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

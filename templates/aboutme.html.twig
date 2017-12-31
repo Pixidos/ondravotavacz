@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+{% block page_loader %}
+    <div id="page-loader">
+        <div class="animated bounceInDown">
+            <div class="spinner"></div>
+        </div>
+        <div class="text-div text-center animated zoomIn">
+            <p class="text-uppercase">INTRODUCING</p>
+            <!-- Name Only -->
+            <h6 class="text-uppercase">ONDRA VOTAVA</h6>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-12">
+
+                    <!-- Profile Picture [Square] -->
+                    <div id="profile" class="center-block">
+                        <img src="/images/profile-pic.png">
+                    </div>
+
+                    <!-- Social Links -->
+                    <div id="intro-div" class="card content-wrapper">
+                        {% include 'parts/social_links.html.twig' %}
+                        <!-- Some Intro About You -->
+                        <div class="text-center">
+                            {{ 'about_me'|snippet|md2html }}
+                        </div>
+
+                        <div class="row">
+                            <!-- Download & Contact Button -->
+                            <div class="col col-xs-12 col-sm-12 col-md-12 text-center">
+                                <!-- Your CV File -->
+                                <a href="{{ path('download_resume')}}" download="ondravotava_cv.pdf" class="btn waves-effect waves-light btn-primary custom-btn">Download CV</a>
+                                <a href="#contact" class="btn waves-effect waves-light btn-primary custom-btn">Contact Me</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'parts/experience.html.twig' %}
+    {% include 'parts/skills.html.twig' %}
+    {% include 'parts/certification.html.twig' %}
+    {% include 'parts/interest.html.twig' %}
+    {% include 'parts/contact.html.twig' %}
+
+{% endblock %}

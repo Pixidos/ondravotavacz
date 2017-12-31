@@ -1,0 +1,36 @@
+<!--==========================================
+    EDUCATION
+    ===========================================-->
+<section id="certifications" class="section">
+    <h4 class="text-uppercase text-center">Certifications</h4>
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-12 col-sm-12 col-xs-12">
+
+                <!-- Timeline -->
+                <div class="timeline center-block">
+                    <ul>
+                        {% for certificate in certifications %}
+                            <li class="card" data-aos="fade-up" style="page-break-inside: avoid;">
+                                <i class="title-icon fa fa-circle"></i>
+                                <div class="timeline-content">
+
+                                    <!-- Heading -->
+                                    <div class="timeline-header">
+                                        <h3 class="text-capitalize">{{ certificate.title }}</h3>
+                                    </div>
+                                    <p class="sub-heading"> {{ certificate.when|date('M Y') }}</p>
+                                    <!-- Education Summary -->
+                                    <div class="content-p">
+                                        {{ certificate.description|md2html|nl2br }}
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- End of Timeline -->
+            </div>
+        </div>
+    </div>
+</section>

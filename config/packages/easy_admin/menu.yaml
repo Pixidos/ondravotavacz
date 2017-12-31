@@ -1,0 +1,14 @@
+easy_admin:
+    design:
+        menu:
+            - { entity: 'Experience', icon: 'th-list', label: 'menu.experience', params: { sortField: 'fromDate', sortDirection: 'DESC' }, default: true }
+            - { entity: 'Certification', icon: 'th-list', label: 'menu.certification', params: { sortField: 'when', sortDirection: 'DESC' } }
+            - label: 'menu.skills'
+              icon: 'flask'
+              children:
+                  - { entity: 'Skill', icon: 'th-list', label: 'menu.skills'}
+                  - { entity: 'SkillCategory', icon: 'tags', label: 'menu.skill_category' }
+            - { entity: 'Snippet', icon: 'th-list', label: 'menu.snippets', params: { sortField: 'snippetId', sortDirection: 'ASC' } }
+            - { entity: 'SocialLink', icon: 'th-list', label: 'menu.social_links' }
+#            - { label: 'menu.about' }
+#            - { label: 'menu.about.home', url: 'https://github.com/javiereguiluz/EasyAdminBundle', icon: 'home', target: '_blank' }

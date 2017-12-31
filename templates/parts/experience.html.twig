@@ -1,0 +1,38 @@
+<section id="experience" class="section">
+    <h4 class="text-uppercase text-center">Experience</h4>
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-12 col-sm-12 col-xs-12">
+
+                <!-- Timeline -->
+                <div class="timeline center-block">
+                    <ul>
+                        {% for expr in experiences %}
+                            <li class="card" data-aos="fade-up" style="page-break-inside: avoid;">
+                                <i class="title-icon fa fa-circle"></i>
+                                <div class="timeline-content">
+
+                                    <!-- Heading -->
+                                    <div class="timeline-header">
+                                        <h3 class="text-capitalize">{{ expr.position }}</h3>
+                                    </div>
+
+                                    <!-- Organization and Period -->
+                                    <div class="sub-heading">{{ expr.place }}</div>
+                                    <div class="sub-heading">{{ expr.fromDate|date('M Y') }}
+                                        - {% if expr.toDate is not null %}{{ expr.toDate|date('M Y') }} {% else %}now{% endif %}</div>
+
+                                    <!-- Job Summary -->
+                                    <div class="content-p">
+                                        {{ expr.description|md2html }}
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- End of Timeline -->
+            </div>
+        </div>
+    </div>
+</section>

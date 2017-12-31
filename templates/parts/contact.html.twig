@@ -1,0 +1,33 @@
+<section id="contact" class="section">
+    <h4 class="text-uppercase text-center">Contact</h4>
+    <div class="container">
+        <div class="row">
+
+            <!-- Contact Info -->
+            <div class="col col-md-5 col-sm-6 col-xs-12">
+                <div class="info card">
+
+                    <!-- Apply your own info here -->
+                    <ul class="text-center center-block" data-aos="fade" data-aos-delay="200" data-aos-offset="0">
+                        <li>
+                            <i class="ion-email center-block"></i>
+                            <span>{{ contact.htmlEmail|raw }}</span>
+                        </li>
+                        <li>
+                            <i class="ion-earth center-block"></i>
+                            <span>{{ contact.website}}</span>
+                        </li>
+                        <li>
+                            <i class="ion-ios-location center-block"></i>
+                            <span>{{ contact.place }}</span>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- ./Contact Info -->
+            {% include 'forms/contact_from.html.twig' %}
+        </div>
+    </div>
+</section>
+

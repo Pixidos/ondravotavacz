@@ -1,0 +1,144 @@
+
+@import "sass/variables";
+
+/*---------------BODY-------------------*/
+html, body{
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  background-color: $body-color;
+  color: $font-color-dark;
+  -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-text-stroke: 1px transparent;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-rendering: optimizelegibility;
+}
+
+/*-------------TYPOGRAPHY----------------*/
+h1, h2, h3, h4, h5, h6, p, a, li{
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-weight: $font-weight-medium;  }
+
+p, a, li{
+  font-weight: $font-weight-normal;  }
+
+h4{
+  font-size: 2em;  }
+
+h6{
+  font-size: 1.4em;  }
+
+p, blockquote{
+  color: $p-color;
+  font-weight: $font-weight-light;
+}
+
+/*---------------COMPONENTS--------------*/
+.shadow{
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15), 0 3px 10px 0 rgba(0, 0, 0, 0.15);
+}
+
+a {
+  color: $accent-color;
+  &:hover, &:active, &:focus {
+    color: $accent-color-light;
+    text-decoration: none;
+    outline:0;
+  }
+}
+
+.swiper-container {
+  width: 100%;
+  height: auto;
+  .swiper-slide{
+    padding-bottom: 35px;
+  }
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    bottom: 0;
+    display: inline-block;
+    border-radius: 100%;
+    background: #000;
+    opacity: 0.2;
+    margin-top: 20px;
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: $primary-color;
+  }
+}
+
+.active-cat{
+  color: #ffffff;
+  border-bottom: 2px solid $accent-color;
+}
+
+.custom-btn {
+  background-color: $accent-color !important;
+  &:hover {
+    color: #fff;
+    outline:0;
+    background-color: $accent-color-dark !important;
+  }
+  &:focus {
+    color: #fff;
+    outline:0;
+    background-color: $accent-color !important;
+  }
+  &:active {
+    color: #fff;
+    outline:0;
+    background-color: $accent-color !important;
+    &:hover {
+      color: #fff;
+      outline:0;
+      background-color: $accent-color !important;
+    }
+    &:focus {
+      color: #fff;
+      outline:0;
+      background-color: $accent-color !important;
+    }
+  }
+}
+
+.back-to-top {
+  border-radius: 50%;
+  text-align: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  box-shadow: $card-box-shadow;
+  &.back-to-top-is-visible{
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+
+@import "./sass/page-preloader";
+@import "./sass/section";
+@import "./sass/container";
+@import "./sass/header";
+@import "./sass/about";
+@import "./sass/timeline";
+@import "./sass/skills";
+@import "./sass/modal";
+@import "./sass/interest";
+@import "./sass/contact";
+@import "./sass/inputs";
+@import "./sass/footer";
+@import "./sass/error";

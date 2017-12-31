@@ -1,0 +1,32 @@
+<section id="skills" class="section" style="page-break-inside: avoid;">
+    <h4 class="text-uppercase text-center">Skills</h4>
+    <div class="container">
+        <div class="row">
+            {% for category in skillCategories %}
+                <!-- Professional Skills -->
+                <div class="col col-md-4 col-sm-4 col-xs-12">
+                    <div class="card content-wrapper skill-wrapper">
+                        <h5 class="text-center skill-title">{{ category.category }}</h5>
+
+                        {% for skill in category.skills %}
+                            <div class="skill-progress-div">
+                                <!-- Add Skill -->
+                                <p>{{ skill.skill }}<span>{{ skill.points }}%</span></p>
+                                <!-- Edit Value Here -->
+                                <div class="progress skill-progress" data-percent="{{ skill.points }}%">
+                                    <div class="determinate skill-determinate">
+                                        <i class="skill-determinate-circle fa fa-circle"
+                                           data-aos="zoom-in" data-aos-delay="300" data-aos-offset="0"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+

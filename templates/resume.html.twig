@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+
+   {% block stylesheets %}
+       <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+       <link href="{{ absolute_url('/stylesheets/font-awesome.min.css') }}" rel="stylesheet">
+       <link href="{{ absolute_url('/stylesheets/ionicons.min.css') }}" rel="stylesheet">
+       <link href="{{ absolute_url('/stylesheets/bootstrap.css') }}" rel="stylesheet">
+       <link href="{{ absolute_url('/stylesheets/materialize.css') }}" rel="stylesheet">
+       <link href="{{ absolute_url('/style.css') }}" rel="stylesheet">
+
+   {% endblock %}
+{% block menu %}{% endblock %}
+{% block page_loader %} {% endblock %}
+{% block content %}
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-12">
+
+                    <!-- Profile Picture [Square] -->
+                    <div id="profile" class="center-block">
+                        <img src="{{ absolute_url('/images/profile-pic.png') }}">
+                    </div>
+
+                    <!-- Social Links -->
+                    <div id="intro-div" class="card content-wrapper">
+                        {% include 'parts/social_links_text.html.twig' %}
+                        <!-- Some Intro About You -->
+                        <div class="text-center">
+                            {{ 'about_me'|snippet|md2html }}
+                        </div>
+
+                        <div class="row">
+                            <!-- Download & Contact Button -->
+                            <div class="col col-xs-12 col-sm-12 col-md-12 text-center">
+                                <ul class="text-center" style="margin-top: 5px">
+                                    <li>
+                                        <i class="ion-android-phone-portrait"></i>
+                                        <span>{{ contact.phone }}</span>
+                                    </li>
+                                    <li>
+                                        <i class="ion-email"></i>
+                                        <span>{{ contact.htmlEmail|raw }}</span>
+                                    </li>
+                                    <li>
+                                        <i class="ion-earth"></i>
+                                        <span>{{ contact.website }}</span>
+                                    </li>
+                                    <li>
+                                        <i class="ion-ios-location"></i>
+                                        <span>{{ contact.place }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'parts/experience.html.twig' %}
+    {% include 'parts/skills.html.twig' %}
+    {% include 'parts/certification.html.twig' %}
+    {% include 'parts/interest.html.twig' %}
+{% endblock %}
+{% block scripts %}
+    <script src="{{ absolute_url('/javascript/jquery-2.1.3.min.js') }}"></script>
+    <script src="{{ absolute_url('/javascript/bootstrap.min.js') }}"></script>
+    <script src="{{ absolute_url('/javascript/materialize.min.js') }}"></script>
+    <script src="{{ absolute_url('/javascript/retina.min.js') }}"></script>
+    <script src="{{ absolute_url('/javascript/resume-script.js') }}"></script>
+{% endblock %}
+{% block footer %} {% endblock %}

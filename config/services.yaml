@@ -1,0 +1,55 @@
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'en'
+    contact:
+        email: me@ondravotava.cz
+        website: https://www.ondravotava.cz
+        phone: +420 777 00 66 73
+        place: Prague, Czech republic
+    pdf:
+        pdf_path: '%kernel.project_dir%/files'
+        file_name: 'ondravotava_cv.pdf'
+    mail:
+        to: 'me@ondravotava.cz'
+        from: 'me@ondravotava.com'
+        subject_prefix: '[FROM WEB] '
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Migrations,Tests}'
+
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    App\Data\Contact:
+        arguments: ['%contact%']
+
+    App\Configs\MailConfig:
+        arguments: ['%mail%']
+
+    App\Configs\PdfConfig:
+        arguments: ['%pdf%']
+
+    App\Listeners\ResumeFlushEventListener:
+        arguments:
+            - '@logger'
+            - '@App\Configs\PdfConfig'
+            - '@Knp\Snappy\Pdf'
+            - '@App\Data\Contact'
+            - '@Twig\Environment'
+        tags:
+            - { name: 'doctrine.event_listener', event: 'onFlush'}
+            - { name: 'doctrine.event_listener', event: 'postFlush'}

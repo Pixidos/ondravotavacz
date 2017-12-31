@@ -1,0 +1,46 @@
+<!-- Contact Form -->
+<div class="col col-md-7 col-sm-6 col-xs-12">
+    <div class="contact card">
+        {{ form_start(form) }}
+            <div class="input-field">
+                <input id="name" name="{{ form.name.vars.full_name }}" type="text" class="validate {{ form.name.vars.errors|length > '' ? 'invalid' }}"
+                       required="required" value="{{ form.name.vars.value }}">
+                <label for="name">Name</label>
+                {{ form_errors(form.name) }}
+            </div>
+            <div class="input-field">
+                <input id="subject" name="{{ form.subject.vars.full_name }}" type="text" class="validate {{ form.subject.vars.errors|length > '' ? 'invalid' }}"
+                       required="required" value="{{ form.subject.vars.value }}">
+                <label for="subject">Subject</label>
+                {{ form_errors(form.subject) }}
+            </div>
+            <div class="input-field">
+                <input id="email" name="{{ form.email.vars.full_name }}" type="email" class="validate {{ form.email.vars.errors|length > '' ? 'invalid' }}"
+                       required="required" value="{{ form.email.vars.value }}">
+                <label for="email">Email</label>
+                {{ form_errors(form.email) }}
+            </div>
+            <div class="input-field">
+                <textarea id="textarea" name="{{ form.message.vars.full_name }}" class="materialize-textarea" required="required">{{ form.message.vars.value }}</textarea>
+                <label for="textarea">Massage</label>
+                {{ form_errors(form.message) }}
+            </div>
+            <div class="row">
+                <div style="display:none">
+                    {{ form_widget(form._token) }}
+                </div>
+                <div class="col col-md-12 col-sm-12 col-xs-12 text-center">
+                    <button type="submit" id="submit" name="submit-data" value="Submit"
+                            class="btn waves-effect waves-light btn-primary custom-btn">
+                        <i class="ion-ios-paperplane"></i>Send
+                    </button>
+                </div>
+                <!-- Message Sent and Error info -->
+                <div id="snackbar">Your Message is sent</div>
+                <div id="fail-snackbar">Something is going wrong, Please try again</div>
+            </div>
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+
+</div>
+<!-- ./Contact Form -->

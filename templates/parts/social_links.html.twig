@@ -1,0 +1,7 @@
+<ul class="text-center list-inline">
+    {% for socialLink in socialLinks %}
+        <li><a href="{{ socialLink.link }}" target="_blank" aria-label="{{ socialLink.title }}">
+                <i class="{{ socialLink.icon }}"></i></a>
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,41 @@
+version: '2'
+services:
+    db:
+        image: mysql:5.7
+        ports:
+            - "3306:3306"
+        volumes:
+          - ovsql_volume:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: symfony
+            MYSQL_USER: symfony
+            MYSQL_PASSWORD: symfony
+    php:
+        build: ./_docker/php-fpm
+        container_name: ov_php
+        ports:
+            - "9000:9000"
+        volumes:
+            - ./:/var/www/symfony:cached
+        depends_on:
+            - db
+        links:
+            - db
+        extra_hosts:
+            - "ondravotava.test:172.20.0.4" #ip addr is nginx add can be changed
+
+    nginx:
+        build: ./_docker/nginx
+        ports:
+            - "80:80"
+        links:
+            - php
+        volumes_from:
+            - php
+        volumes:
+            - ./_docker/nginx/logs:/var/log/nginx:cached
+
+volumes:
+  ovsql_volume:
+    external: true

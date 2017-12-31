@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}Login{% endblock %}
+{% block body %}
+
+
+    <div style="margin: auto; max-width: 600px">
+        <div class="contact card">
+            {% if error %}
+                <div class="alert alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <form action="{{ path('login') }}" method="post">
+                <div class="input-field">
+                    <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+                    <label for="username">Username:</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="password" name="_password"/>
+                    <label for="password">Password:</label>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <input type="hidden" name="_target_path" value="{{ path('easyadmin') }}"/>
+                        <button type="submit" class="btn btn-default">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
