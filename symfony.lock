@@ -62,9 +62,6 @@
     "erusev/parsedown": {
         "version": "1.6.4"
     },
-    "h4cc/wkhtmltopdf-amd64": {
-        "version": "0.12.3"
-    },
     "javiereguiluz/easyadmin-bundle": {
         "version": "1.17",
         "recipe": {

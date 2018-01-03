@@ -12,12 +12,12 @@ use App\Utils\Markdown;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
+
 /**
  * Class MarkdownExtension
  * @package App\Extensions
- * @author Ondra Votava <ondrej.votava@mediafactory.cz>
+ * @author Ondra Votava <me@ondravotava.cz>
  */
-
 class MarkdownExtension extends AbstractExtension
 {
     /**
@@ -41,7 +41,8 @@ class MarkdownExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('md2html', [$this, 'markdownToHtml'], [
+            new TwigFilter(
+                'md2html', [$this, 'markdownToHtml'], [
                 'is_safe' => ['html'],
                 'pre_escape' => 'html',
             ]),
