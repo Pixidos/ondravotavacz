@@ -1,0 +1,15 @@
+parameters:
+    locale: 'en'
+    contact:
+        email: me@ondravotava.cz
+        website: https://www.ondravotava.cz
+        phone: +420 777 00 66 73
+        place: Prague, Czech republic
+    pdf:
+        pdf_path: '%kernel.project_dir%/files'
+        file_name: 'ondravotava_cv.pdf'
+    mail:
+        to: 'me@ondravotava.cz'
+        from: 'me@ondravotava.com'
+        subject_prefix: '[FROM WEB] '
+    cockie_secured: false

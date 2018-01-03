@@ -127,7 +127,9 @@ a {
     opacity: 1;
   }
 }
-
+.break-page{
+  page-break-inside: avoid;
+}
 
 @import "./sass/page-preloader";
 @import "./sass/section";

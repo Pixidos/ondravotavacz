@@ -6,6 +6,7 @@
 /vendor/
 /files/*
 !/files/.gitkeep
+config/parameters.yaml
 ###< symfony/framework-bundle ###
 
 ###> symfony/web-server-bundle ###
