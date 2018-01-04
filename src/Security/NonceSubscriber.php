@@ -12,6 +12,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
+/**
+ * Class NonceSubscriber
+ * @package App\Security
+ * @author Ondra Votava <me@ondravotava.cz>
+ */
 class NonceSubscriber implements EventSubscriberInterface
 {
     /**
@@ -36,12 +41,28 @@ class NonceSubscriber implements EventSubscriberInterface
     {
         // get the Response object from the event
         $response = $event->getResponse();
-    
+        
         // create a CSP rule, using the nonce generator service
         $nonce = $this->nonceGenerator->getNonce();
-        $cspHeader =  sprintf("default-src 'none'; img-src 'self' https://www.google-analytics.com; script-src 'strict-dynamic' 'nonce-%s' 'self' 'report-sample' https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com 'report-sample'; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; frame-ancestors 'none'; form-action 'self'; base-uri 'none';report-uri https://738b3fb6c6a6dae7e767ff601d34b671.report-uri.io/r/default/csp/enforce;", $nonce);
+        $cspHeader = "default-src 'none'; ";
+        // Images
+        $cspHeader .= "img-src 'self' https://www.google-analytics.com; ";
+        // Connect
+        $cspHeader .= "connect-src 'self'; ";
+        // Scripts
+        $cspHeader .= sprintf("script-src 'strict-dynamic' 'nonce-%s' 'self' 'report-sample' https://www.google-analytics.com; ", $nonce);
+        // Styles
+        $cspHeader .= sprintf("style-src 'self' 'nonce-%s' 'report-sample'; ", $nonce); //https://fonts.googleapis.com
+        // Fonts
+        $cspHeader .= "font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; frame-ancestors 'none'; ";
+        // Form
+        $cspHeader .= "form-action 'self'; ";
+        // Uri
+        $cspHeader .= "base-uri 'none';report-uri https://738b3fb6c6a6dae7e767ff601d34b671.report-uri.io/r/default/csp/enforce;";
         // set CPS header on the response object
         $response->headers->set('Content-Security-Policy', $cspHeader);
+        
+        // add other headers -> @TODO: make configable
         $response->headers->set('X-XSS-Protection', '1; mode=block');
         $response->headers->set('X-Powered-By', 'Ondra Votava code');
         $response->headers->set('Vary', 'X-Requested-With');

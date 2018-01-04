@@ -130,6 +130,9 @@ a {
 .break-page{
   page-break-inside: avoid;
 }
+.hidden{
+  display: none;
+}
 
 @import "./sass/page-preloader";
 @import "./sass/section";
