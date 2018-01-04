@@ -52,7 +52,7 @@ class NonceSubscriber implements EventSubscriberInterface
         // Scripts
         $cspHeader .= sprintf("script-src 'strict-dynamic' 'nonce-%s' 'self' 'report-sample' https://www.google-analytics.com; ", $nonce);
         // Styles
-        $cspHeader .= sprintf("style-src 'self' 'nonce-%s' 'report-sample'; ", $nonce); //https://fonts.googleapis.com
+        $cspHeader .= sprintf("style-src 'self' 'nonce-%s' https://fonts.googleapis.com 'report-sample'; ", $nonce);
         // Fonts
         $cspHeader .= "font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; frame-ancestors 'none'; ";
         // Form
