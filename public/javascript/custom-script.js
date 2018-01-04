@@ -48,7 +48,7 @@
         $('#about').waypoint(function (direction) {
             sectionChangePropagation('#about');
         }, {
-            offset: '25%'
+            offset: '40%'
         });
 
         $('#experience').waypoint(function (direction) {
@@ -74,7 +74,7 @@
         $('#contact').waypoint(function (direction) {
             sectionChangePropagation('#contact');
         }, {
-            offset: '25%'
+            offset: '40%'
         });
 
         /* =============== Side Nav =============== */
