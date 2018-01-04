@@ -47,14 +47,15 @@
 
         $('#about').waypoint(function (direction) {
             sectionChangePropagation('#about');
+            console.log('call');
         }, {
-            offset: '40%'
+            offset: '10%'
         });
 
         $('#experience').waypoint(function (direction) {
             sectionChangePropagation('#experience');
         }, {
-            offset: '25%'
+            offset: 0
         });
         $('#skills').waypoint(function (direction) {
             sectionChangePropagation('#skills');
