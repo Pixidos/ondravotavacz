@@ -10,7 +10,7 @@
 
     <title>{% block title %}Resume {% endblock %} | Ondra Votava</title>
     <!-- Fav Icon -->
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico" nonce="{{ nonce() }}>
     <!-- Apple Touch Icon -->
     {#<link rel="apple-touch-icon" href="{{ absolute_url('/images/apple-touch-icon.png') }}">#}
 
@@ -79,8 +79,6 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111925650-1" nonce="{{ nonce() }}"></script>
     <script src="/javascript/gtag.js" nonce="{{ nonce() }}"></script>
-
-
 {% endblock %}
 </body>
 </html>

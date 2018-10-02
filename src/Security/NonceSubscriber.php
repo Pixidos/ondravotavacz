@@ -46,11 +46,11 @@ class NonceSubscriber implements EventSubscriberInterface
         $nonce = $this->nonceGenerator->getNonce();
         $cspHeader = "default-src 'none'; ";
         // Images
-        $cspHeader .= "img-src 'self' https://www.google-analytics.com; ";
+        $cspHeader .= "img-src 'self' https://www.google-analytics.com https://www.gstatic.com;";
         // Connect
-        $cspHeader .= "connect-src 'self'; ";
+        $cspHeader .= "connect-src 'self' https://www.google-analytics.com; ";
         // Scripts
-        $cspHeader .= sprintf("script-src 'strict-dynamic' 'nonce-%s' 'self' 'report-sample' https://www.google-analytics.com; ", $nonce);
+        $cspHeader .= sprintf("script-src 'strict-dynamic' 'nonce-%s' 'self' 'report-sample' https://www.googletagmanager.com https://www.google-analytics.com; ", $nonce);
         // Styles
         $cspHeader .= sprintf("style-src 'self' 'nonce-%s' https://fonts.googleapis.com 'report-sample'; ", $nonce);
         // Fonts
