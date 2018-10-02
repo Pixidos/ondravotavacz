@@ -46,7 +46,7 @@ class NonceSubscriber implements EventSubscriberInterface
         $nonce = $this->nonceGenerator->getNonce();
         $cspHeader = "default-src 'none'; ";
         // Images
-        $cspHeader .= "img-src 'self' https://www.google-analytics.com https://www.gstatic.com;";
+        $cspHeader .= "img-src 'self' data https://www.google-analytics.com https://www.gstatic.com;";
         // Connect
         $cspHeader .= "connect-src 'self' https://www.google-analytics.com; ";
         // Scripts
