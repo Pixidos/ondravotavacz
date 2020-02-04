@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ondra Votava
- * Date: 22.12.17
- * Time: 15:37
- */
+
+declare(strict_types=1);
 
 namespace App\Extensions;
 
@@ -17,7 +13,7 @@ use Twig\TwigFilter;
 /**
  * Class MarkdownExtension
  * @package App\Extensions
- * @author Ondra Votava <ondrej.votava@mediafactory.cz>
+ * @author  Ondra Votava <ondrej.votava@mediafactory.cz>
  */
 class SnippetsExtension extends AbstractExtension
 {
@@ -25,7 +21,7 @@ class SnippetsExtension extends AbstractExtension
      * @var EntityManagerInterface entityManager
      */
     private $entityManager;
-    
+
     /**
      * SnippetsExtension constructor.
      *
@@ -35,22 +31,24 @@ class SnippetsExtension extends AbstractExtension
     {
         $this->entityManager = $entityManager;
     }
-    
+
     /**
-     * @return array|TwigFilter[]
+     * @return array<TwigFilter>
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter(
-                'snippet', [$this, 'getSnippet'], [
-                'is_safe' => ['html'],
-                'pre_escape' => 'html',
-            ]
+                'snippet',
+                [$this, 'getSnippet'],
+                [
+                             'is_safe' => ['html'],
+                             'pre_escape' => 'html',
+                         ]
             ),
         ];
     }
-    
+
     /**
      * @param string $snippetId
      *
@@ -66,15 +64,16 @@ class SnippetsExtension extends AbstractExtension
                 ->from(Snippet::class, 'snippet', 'snippet.snippetId')
                 ->where('snippet.snippetId = :snippetId')
                 ->setParameter('snippetId', strtolower($snippetId))
-                ->getQuery()->getOneOrNullResult();
+                ->getQuery()
+                ->getOneOrNullResult();
         } catch (NonUniqueResultException $e) {
             return ''; //TODO: need log this situation
         }
-    
-        if (null === $snippet) {
+
+        if ($snippet === null) {
             return ''; //TODO: need log this situation
         }
-    
+
         return $snippet->getText();
     }
 }

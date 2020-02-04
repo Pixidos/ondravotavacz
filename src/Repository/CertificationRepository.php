@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ondra
- * Date: 26.12.17
- * Time: 17:17
- */
+
+declare(strict_types=1);
 
 namespace App\Repository;
-
 
 use App\Entity\Certification;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,7 +13,7 @@ class CertificationRepository
      * @var EntityManagerInterface
      */
     private $entityManager;
-    
+
     /**
      * CertificationRepository constructor.
      *
@@ -28,11 +23,11 @@ class CertificationRepository
     {
         $this->entityManager = $entityManager;
     }
-    
+
     /**
      * @param string $sortDirection
      *
-     * @return array|Certification[]
+     * @return array<Certification>
      */
     public function getAll($sortDirection = 'DESC'): array
     {

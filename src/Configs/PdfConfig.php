@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Configs;
 
 /**
  * Class PdfConfig
  * @package App\Configs
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author  Ondra Votava <ondra@votava.dev>
  */
 final class PdfConfig extends AbstractConfig
 {
@@ -17,21 +19,19 @@ final class PdfConfig extends AbstractConfig
      * @var string
      */
     private $path;
-    
+
     /**
      * PdfConfig constructor.
      *
-     * @param array $args
-     *
-     * @throws \App\Exceptions\LogicException
+     * @param array<string,mixed> $args
      */
     public function __construct(array $args)
     {
         $path = (string)$this->getValue('pdf_path', $args);
         $this->path = rtrim($path, '/') . '/';
-        $this->filename = (string)$this->getValue('file_name', $args);;
+        $this->filename = (string)$this->getValue('file_name', $args);
     }
-    
+
     /**
      * @return string
      */
@@ -39,7 +39,7 @@ final class PdfConfig extends AbstractConfig
     {
         return $this->path;
     }
-    
+
     /**
      * @return string
      */
@@ -47,7 +47,7 @@ final class PdfConfig extends AbstractConfig
     {
         return $this->filename;
     }
-    
+
     /**
      * @return string
      */
@@ -56,4 +56,3 @@ final class PdfConfig extends AbstractConfig
         return $this->getPath() . $this->getFilename();
     }
 }
-

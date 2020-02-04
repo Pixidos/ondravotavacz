@@ -1,7 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller;
-
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Debug\Exception\FlattenException;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 /**
  * Class ErrorController
  * @package App\Controller
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author Ondra Votava <ondra@votava.dev>
  */
 class ErrorController extends Controller
 {
@@ -27,13 +28,13 @@ class ErrorController extends Controller
     {
         $text = 'Something is wrong. Server not working';
         $title = 'Error';
-        if (404 === (int)$exception->getStatusCode()) {
+        if ((int)$exception->getStatusCode() === 404) {
             $title = $text = 'Page not found';
         }
-        if (403 === (int)$exception->getStatusCode()) {
+        if ((int)$exception->getStatusCode() === 403) {
             $title = $text = 'Access denied';
         }
-      
+
         return $this->render(
             'error/error.html.twig',
             [

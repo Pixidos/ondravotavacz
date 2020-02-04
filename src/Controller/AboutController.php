@@ -1,22 +1,25 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller;
 
 use App\Service\AboutMe;
 use App\Service\ContactForm;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class AboutController
  * @package App\Controller
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author Ondra Votava <ondra@votava.dev>
  */
-class AboutController extends Controller
+class AboutController extends AbstractController
 {
     /**
      * @var AboutMe
@@ -26,7 +29,7 @@ class AboutController extends Controller
      * @var ContactForm
      */
     private $contactForm;
-    
+
     /**
      * AboutController constructor.
      *
@@ -38,16 +41,14 @@ class AboutController extends Controller
         $this->aboutMe = $aboutMe;
         $this->contactForm = $contactForm;
     }
-    
+
     /**
      * @Route("/", name="about")
      * @Route("/", name="homepage")
      * @param Request $request
      *
      * @return Response
-     * @throws \App\Exceptions\LogicException
-     * @throws \Symfony\Component\Form\Exception\LogicException
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws InvalidOptionsException
      */
     public function index(Request $request): Response
     {
@@ -59,6 +60,7 @@ class AboutController extends Controller
                 if ($send) {
                     return new JsonResponse(['status' => 'success']);
                 }
+
                 return new JsonResponse([
                     'status' => 'fail',
                     'errors' => $this->contactForm->getErrors(),
@@ -66,9 +68,7 @@ class AboutController extends Controller
             }
         }
         $data['form'] = $this->contactForm->getFromView();
-        
-        
+
         return $this->render('aboutme.html.twig', $data);
     }
-    
 }

@@ -1,15 +1,17 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Configs;
 
 /**
  * Class MailConfig
  * @package App\Configs
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author  Ondra Votava <ondra@votava.dev>
  */
 final class MailConfig extends AbstractConfig
 {
-    
+
     /**
      * @var string
      */
@@ -22,22 +24,20 @@ final class MailConfig extends AbstractConfig
      * @var string
      */
     private $prefix;
-    
+
     /**
      * MailConfig constructor.
      *
-     * @param $args
+     * @param array<string,mixed> $args
      *
-     * @throws \App\Exceptions\LogicException
      */
     public function __construct($args)
     {
         $this->to = (string)$this->getValue('to', $args);
         $this->from = (string)$this->getValue('from', $args);
         $this->prefix = (string)$this->getValue('subject_prefix', $args);
-
     }
-    
+
     /**
      * @return string
      */
@@ -45,7 +45,7 @@ final class MailConfig extends AbstractConfig
     {
         return $this->to;
     }
-    
+
     /**
      * @return string
      */
@@ -53,7 +53,7 @@ final class MailConfig extends AbstractConfig
     {
         return $this->from;
     }
-    
+
     /**
      * @return string
      */

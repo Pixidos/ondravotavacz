@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -20,33 +23,33 @@ class Skill
      * @var integer
      */
     private $id;
-    
+
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string", nullable=false)
      * @var string
      */
     private $skill;
-    
+
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="integer", nullable=false)
      * @var integer
      */
     private $points;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="SkillCategory", inversedBy="skills", cascade={"all"})
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      * @var SkillCategory
      */
     private $category;
-    
+
     public function __toString(): ?string
     {
         return $this->skill;
     }
-    
+
     /**
      * @return int|null
      */
@@ -54,7 +57,7 @@ class Skill
     {
         return $this->id;
     }
-    
+
     /**
      * @return string|null
      */
@@ -62,7 +65,7 @@ class Skill
     {
         return $this->skill;
     }
-    
+
     /**
      * @param string $skill
      *
@@ -71,10 +74,10 @@ class Skill
     public function setSkill(string $skill): Skill
     {
         $this->skill = $skill;
-        
+
         return $this;
     }
-    
+
     /**
      * @return int|null
      */
@@ -82,7 +85,7 @@ class Skill
     {
         return $this->points;
     }
-    
+
     /**
      * @param int $points
      *
@@ -91,10 +94,10 @@ class Skill
     public function setPoints(int $points): Skill
     {
         $this->points = $points;
-        
+
         return $this;
     }
-    
+
     /**
      * @return SkillCategory|null
      */
@@ -102,7 +105,7 @@ class Skill
     {
         return $this->category;
     }
-    
+
     /**
      * @param SkillCategory $category
      *
@@ -111,9 +114,7 @@ class Skill
     public function setCategory(SkillCategory $category): Skill
     {
         $this->category = $category;
-        
+
         return $this;
     }
-    
-    
 }

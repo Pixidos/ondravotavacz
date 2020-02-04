@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -9,14 +11,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class Education
  * @package App\Entity
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author Ondra Votava <ondra@votava.dev>
  *
  * @ORM\Entity()
  * @ORM\Table(name="certification")
  */
 class Certification
 {
-    
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -24,27 +26,27 @@ class Certification
      * @var integer
      */
     private $id;
-    
+
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string", nullable=false)
      * @var string
      */
     private $title;
-    
+
     /**
      * @Assert\NotNull()
      * @ORM\Column(name="`when`", type="date", nullable=false)
      * @var DateTime
      */
     private $when;
-    
+
     /**
      * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     private $description;
-    
+
     /**
      * @return int|null
      */
@@ -52,8 +54,8 @@ class Certification
     {
         return $this->id;
     }
-    
-    
+
+
     /**
      * @return string|null
      */
@@ -61,7 +63,7 @@ class Certification
     {
         return $this->title;
     }
-    
+
     /**
      * @param string $title
      *
@@ -70,10 +72,10 @@ class Certification
     public function setTitle(string $title): Certification
     {
         $this->title = $title;
-        
+
         return $this;
     }
-    
+
     /**
      * @return DateTime|null
      */
@@ -81,7 +83,7 @@ class Certification
     {
         return $this->when;
     }
-    
+
     /**
      * @param DateTime $when
      *
@@ -90,10 +92,10 @@ class Certification
     public function setWhen(DateTime $when): Certification
     {
         $this->when = $when;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string|null
      */
@@ -101,7 +103,7 @@ class Certification
     {
         return $this->description;
     }
-    
+
     /**
      * @param string $description
      *
@@ -110,8 +112,7 @@ class Certification
     public function setDescription(string $description): Certification
     {
         $this->description = $description;
-        
+
         return $this;
     }
-    
 }

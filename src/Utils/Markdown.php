@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ondra Votava
- * Date: 22.12.17
- * Time: 15:26
- */
+
+declare(strict_types=1);
 
 namespace App\Utils;
 
@@ -13,23 +9,22 @@ use Parsedown;
 /**
  * Class Markdown
  * @package App\Utils
- * @author Ondra Votava <ondrej.votava@mediafactory.cz>
+ * @author  Ondra Votava <ondra@votava.dev>
  */
-
 class Markdown
 {
-    
-    /** @var Parsedown  */
+
+    /** @var Parsedown */
     protected $parser;
-    
+
     /**
      * Markdown constructor.
      */
-    public function __construct(  )
+    public function __construct()
     {
         $this->parser = new Parsedown();
     }
-    
+
     /**
      * @param string $string
      *

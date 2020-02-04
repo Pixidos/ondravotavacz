@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ondra Votava
- * Date: 22.12.17
- * Time: 15:37
- */
+
+declare(strict_types=1);
 
 namespace App\Extensions;
 
@@ -12,11 +8,10 @@ use App\Utils\Markdown;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-
 /**
  * Class MarkdownExtension
  * @package App\Extensions
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author Ondra Votava <ondra@votava.dev>
  */
 class MarkdownExtension extends AbstractExtension
 {
@@ -24,7 +19,7 @@ class MarkdownExtension extends AbstractExtension
      * @var Markdown parser
      */
     private $parser;
-    
+
     /**
      * MarkdownExtension constructor.
      *
@@ -34,7 +29,7 @@ class MarkdownExtension extends AbstractExtension
     {
         $this->parser = $parser;
     }
-    
+
     /**
      * @return array|TwigFilter[]
      */
@@ -42,13 +37,16 @@ class MarkdownExtension extends AbstractExtension
     {
         return [
             new TwigFilter(
-                'md2html', [$this, 'markdownToHtml'], [
+                'md2html',
+                [$this, 'markdownToHtml'],
+                [
                 'is_safe' => ['html'],
                 'pre_escape' => 'html',
-            ]),
+                ]
+            ),
         ];
     }
-    
+
     /**
      * @param string $content
      *

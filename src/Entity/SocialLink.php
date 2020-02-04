@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -21,21 +23,21 @@ class SocialLink
      * @var integer
      */
     private $id;
-    
+
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string", nullable=false)
      * @var string
      */
     private $title;
-    
+
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string", nullable=false)
      * @var string
      */
     private $icon;
-    
+
     /**
      * @Assert\NotBlank()
      * @Assert\Url()
@@ -43,7 +45,7 @@ class SocialLink
      * @var string
      */
     private $link;
-    
+
     /**
      * @return int|null
      */
@@ -51,8 +53,8 @@ class SocialLink
     {
         return $this->id;
     }
-    
-    
+
+
     /**
      * @return string|null
      */
@@ -60,7 +62,7 @@ class SocialLink
     {
         return $this->title;
     }
-    
+
     /**
      * @param string $title
      *
@@ -69,10 +71,10 @@ class SocialLink
     public function setTitle(string $title): SocialLink
     {
         $this->title = $title;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string|null
      */
@@ -80,7 +82,7 @@ class SocialLink
     {
         return $this->icon;
     }
-    
+
     /**
      * @param string $icon
      *
@@ -89,10 +91,10 @@ class SocialLink
     public function setIcon(string $icon): SocialLink
     {
         $this->icon = $icon;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string|null
      */
@@ -100,7 +102,7 @@ class SocialLink
     {
         return $this->link;
     }
-    
+
     /**
      * @param string $link
      *
@@ -109,9 +111,7 @@ class SocialLink
     public function setLink(string $link): SocialLink
     {
         $this->link = $link;
-        
+
         return $this;
     }
-    
-    
 }

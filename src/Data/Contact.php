@@ -1,28 +1,31 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Data;
 
 /**
  * Class Contact
  * @package App\Data
+ * @author  Ondra Votava <ondra@votava.dev>
  */
 class Contact
 {
     /**
-     * @var array params
+     * @var array<string,mixed> params
      */
     private $params;
-    
+
     /**
      * Contact constructor.
      *
-     * @param array $params
+     * @param array<string,mixed> $params
      */
     public function __construct(array $params)
     {
         $this->params = $params;
     }
-    
+
     /**
      * @return string
      */
@@ -30,7 +33,7 @@ class Contact
     {
         return $this->params['email'] ?? '';
     }
-    
+
     /**
      * @return string
      */
@@ -38,7 +41,7 @@ class Contact
     {
         return str_replace('@', '&commat;', $this->getEmail());
     }
-    
+
     /**
      * @return string
      */
@@ -46,7 +49,7 @@ class Contact
     {
         return $this->params['phone'] ?? '';
     }
-    
+
     /**
      * @return string
      */
@@ -54,8 +57,8 @@ class Contact
     {
         return $this->params['place'] ?? '';
     }
-    
-    
+
+
     /**
      * @return string
      */
@@ -63,5 +66,4 @@ class Contact
     {
         return $this->params['website'] ?? '';
     }
-    
 }

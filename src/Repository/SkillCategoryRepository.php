@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -8,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 /**
  * Class SkillCategoryRepository
  * @package App\Repository
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author Ondra Votava <ondra@votava.dev>
  */
 class SkillCategoryRepository
 {
@@ -16,7 +18,7 @@ class SkillCategoryRepository
      * @var EntityManagerInterface entityManager
      */
     private $entityManager;
-    
+
     /**
      * SkillCategoryRepository constructor.
      *
@@ -26,7 +28,7 @@ class SkillCategoryRepository
     {
         $this->entityManager = $entityManager;
     }
-    
+
     /**
      * @return array|SkillCategory[]
      */
@@ -37,7 +39,7 @@ class SkillCategoryRepository
            ->addSelect('skill_category')
            ->orderBy('skill_category.id', 'ASC');
         $categories = $qb->getQuery()->getResult();
-    
+
         $ids = array_keys($categories);
         $this->entityManager
             ->createQueryBuilder()
@@ -49,7 +51,7 @@ class SkillCategoryRepository
             ->setParameter('ids', $ids)
             ->getQuery()
             ->getResult();
-    
+
         return $categories;
     }
 }

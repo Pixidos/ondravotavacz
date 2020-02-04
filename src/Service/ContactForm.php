@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ondra
- * Date: 28.12.17
- * Time: 9:18
- */
+
+declare(strict_types=1);
 
 namespace App\Service;
-
 
 use App\Exceptions\LogicException;
 use Symfony\Component\Form\FormError;
@@ -15,6 +10,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
 class ContactForm
 {
@@ -26,12 +22,12 @@ class ContactForm
      * @var SendMail
      */
     private $sendMail;
-    
+
     /**
      * @var FormInterface
      */
     private $form;
-    
+
     /**
      * ContactForm constructor.
      *
@@ -43,34 +39,31 @@ class ContactForm
         $this->formFactory = $formFactory;
         $this->sendMail = $sendMail;
     }
-    
+
     /**
      * @return FormView
-     * @throws \App\Exceptions\LogicException
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws InvalidOptionsException
      */
     public function getFromView(): FormView
     {
-        if (null === $this->form) {
+        if ($this->form === null) {
             throw new LogicException(sprintf('Must call method %s::create() before', static::class));
         }
-    
+
         return $this->form->createView();
     }
-    
+
     /**
      * @param Request $request
      *
      * @return bool
-     * @throws \Symfony\Component\Form\Exception\LogicException
-     * @throws \App\Exceptions\LogicException
      */
     public function handleRequest(Request $request): bool
     {
-        if (null === $this->form) {
+        if ($this->form === null) {
             throw new LogicException(sprintf('Must call method %s::create() before', static::class));
         }
-        
+
         if (!$request->isMethod('POST')) {
             return false;
         }
@@ -80,58 +73,63 @@ class ContactForm
         if (!$this->form->isValid()) {
             return false;
         }
-        
+
         $data = $this->form->getData();
         if ($this->sendMail->send($data['email'], $data['subject'], $data['message'])) {
             $this->form = $clone;
+
             return true;
         }
         $this->form->addError(new FormError('failed email send'));
+
         return false;
     }
-    
+
     /**
      * @param string $action
      *
      * @return FormInterface
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws InvalidOptionsException
      */
     public function create(string $action): FormInterface
     {
         return $this->form = $this->formFactory->create(
-            \App\Forms\ContactForm::class, null, [
+            \App\Forms\ContactForm::class,
+            null,
+            [
                 'action' => $action,
             ]
         );
     }
-    
-    
+
+
     /**
-     * @return array
+     * @return array<int|string, array<int|string, array<array<string>|string>|string>|string>
      */
     public function getErrors(): array
     {
         return $this->getErrorsFromForm($this->form);
     }
-    
+
     /**
      * @param FormInterface $form
      *
-     * @return array
+     * @return array<string|array>
      */
     private function getErrorsFromForm(FormInterface $form): array
     {
-        $errors = array();
+        $errors = [];
+        /** @var FormError $error */
         foreach ($form->getErrors() as $error) {
             $errors[] = $error->getMessage();
         }
         foreach ($form->all() as $childForm) {
-            if ($childForm instanceof FormInterface) {
-                if ($childErrors = $this->getErrorsFromForm($childForm)) {
-                    $errors[$childForm->getName()] = $childErrors;
-                }
+            $childErrors = $this->getErrorsFromForm($childForm);
+            if ((count($childErrors) > 0)) {
+                $errors[$childForm->getName()] = $childErrors;
             }
         }
+
         return $errors;
     }
 }

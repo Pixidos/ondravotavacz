@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ondra Votava
- * Date: 19.12.17
- * Time: 7:17
- */
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -28,42 +24,42 @@ class Experience
      * @var integer
      */
     private $id;
-    
+
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string", nullable=false)
      * @var string
      */
     private $position;
-    
+
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string", nullable=false)
      * @var string
      */
     private $place;
-    
+
     /**
      * @Assert\NotNull()
      * @ORM\Column(type="date", nullable=false)
      * @var DateTime
      */
     private $fromDate;
-    
+
     /**
      * @ORM\Column(type="date", nullable=true)
      * @var DateTime|null
      */
     private $toDate;
-    
+
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="text", nullable=false)
      * @var string
      */
     private $description;
-    
-    
+
+
     /**
      * @return int|null
      */
@@ -71,7 +67,7 @@ class Experience
     {
         return $this->id;
     }
-    
+
     /**
      * @return string|null
      */
@@ -79,7 +75,7 @@ class Experience
     {
         return $this->position;
     }
-    
+
     /**
      * @param string $position
      *
@@ -88,10 +84,10 @@ class Experience
     public function setPosition(string $position): Experience
     {
         $this->position = $position;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string|null
      */
@@ -99,7 +95,7 @@ class Experience
     {
         return $this->place;
     }
-    
+
     /**
      * @param string $place
      *
@@ -108,10 +104,10 @@ class Experience
     public function setPlace(string $place): Experience
     {
         $this->place = $place;
-        
+
         return $this;
     }
-    
+
     /**
      * @return DateTime|null
      */
@@ -119,7 +115,7 @@ class Experience
     {
         return $this->fromDate;
     }
-    
+
     /**
      * @param DateTime $fromDate
      *
@@ -128,10 +124,10 @@ class Experience
     public function setFromDate(DateTime $fromDate): Experience
     {
         $this->fromDate = $fromDate;
-        
+
         return $this;
     }
-    
+
     /**
      * @return DateTime|null
      */
@@ -139,7 +135,7 @@ class Experience
     {
         return $this->toDate;
     }
-    
+
     /**
      * @param null|DateTime $toDate
      *
@@ -148,10 +144,10 @@ class Experience
     public function setToDate(?DateTime $toDate): Experience
     {
         $this->toDate = $toDate;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string|null
      */
@@ -159,7 +155,7 @@ class Experience
     {
         return $this->description;
     }
-    
+
     /**
      * @param string $description
      *
@@ -168,9 +164,7 @@ class Experience
     public function setDescription(string $description): Experience
     {
         $this->description = $description;
-        
+
         return $this;
     }
-    
-    
 }

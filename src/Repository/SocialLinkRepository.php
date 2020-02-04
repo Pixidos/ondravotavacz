@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -8,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 /**
  * Class SocialLinkRepository
  * @package App\Repository
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author  Ondra Votava <ondra@votava.dev>
  */
 class SocialLinkRepository
 {
@@ -16,7 +18,7 @@ class SocialLinkRepository
      * @var EntityManagerInterface
      */
     private $entityManager;
-    
+
     /**
      * SocialLinkRepository constructor.
      *
@@ -26,9 +28,9 @@ class SocialLinkRepository
     {
         $this->entityManager = $entityManager;
     }
-    
+
     /**
-     * @return SocialLink[]
+     * @return array<SocialLink>
      */
     public function getAll(): array
     {
