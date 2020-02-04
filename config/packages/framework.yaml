@@ -9,7 +9,7 @@ framework:
         # With this config, PHP's native session handling is used
         handler_id: ~
         cookie_secure: '%cockie_secured%'
-
+        cookie_samesite: 'strict'
 
     #esi: ~
     #fragments: ~

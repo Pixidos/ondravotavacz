@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
-
 
 /**
  * Class Snippet
@@ -22,13 +24,13 @@ class Snippet
      * @var string
      */
     private $snippetId;
-    
+
     /**
      * @ORM\Column(type="text", nullable=false)
      * @var string
      */
     private $text;
-    
+
     /**
      * @return string|null
      */
@@ -36,7 +38,7 @@ class Snippet
     {
         return $this->snippetId;
     }
-    
+
     /**
      * @param string $snippetId
      *
@@ -45,10 +47,10 @@ class Snippet
     public function setSnippetId(string $snippetId): Snippet
     {
         $this->snippetId = $snippetId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string|null
      */
@@ -56,7 +58,7 @@ class Snippet
     {
         return $this->text;
     }
-    
+
     /**
      * @param string $text
      *
@@ -65,9 +67,7 @@ class Snippet
     public function setText(string $text): Snippet
     {
         $this->text = $text;
-        
+
         return $this;
     }
-    
-    
 }

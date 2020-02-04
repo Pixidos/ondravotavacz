@@ -1,8 +1,8 @@
 easy_admin:
-    site_name: 'OndraVotava.cz'
-    design:
-        form_theme:   'vertical'
-        color_scheme: 'dark'
+  site_name: 'OndraVotava.cz'
+  design:
+    form_theme:   'vertical'
+    brand_color: 'dark'
 #        assets:
 #            css:
 #                - '/bundles/app/stylesheets/demo.css'

@@ -1,28 +1,23 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ondra
- * Date: 27.12.17
- * Time: 15:49
- */
+
+declare(strict_types=1);
 
 namespace App\Controller;
 
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * Class SecurityController
  * @package App\Controller
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author  Ondra Votava <ondra@votava.dev>
  */
-class SecurityController extends Controller
+class SecurityController extends AbstractController
 {
-    
+
     /**
      * @Route("/login", name="login")
      * @param Request             $request
@@ -34,15 +29,16 @@ class SecurityController extends Controller
     {
         // get the login error if there is one
         $error = $authUtils->getLastAuthenticationError();
-        
+
         // last username entered by the user
         $lastUsername = $authUtils->getLastUsername();
-        
-        return $this->render('login.html.twig', array(
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ));
+
+        return $this->render(
+            'login.html.twig',
+            [
+                'last_username' => $lastUsername,
+                'error' => $error,
+            ]
+        );
     }
-    
-    
 }

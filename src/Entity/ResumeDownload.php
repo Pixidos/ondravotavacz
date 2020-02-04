@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ondra
- * Date: 30.12.17
- * Time: 5:32
- */
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -13,14 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class ResumeDownload
  * @package App\Entity
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author  Ondra Votava <ondra@votava.dev>
  *
  * @ORM\Entity()
  * @ORM\Table(name="resume_downloads")
  */
 class ResumeDownload
 {
-    
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -28,19 +24,19 @@ class ResumeDownload
      * @var integer
      */
     private $id;
-    
+
     /**
      * @ORM\Column(type="datetime", nullable=false)
      * @var \DateTime
      */
     private $downloadAt;
-    
+
     /**
      * @ORM\Column(type="string", nullable=false)
      * @var string
      */
     private $fromIp;
-    
+
     /**
      * ResumeDownload constructor.
      *
@@ -51,7 +47,7 @@ class ResumeDownload
         $this->fromIp = $ip;
         $this->downloadAt = new \DateTime();
     }
-    
+
     /**
      * @return int
      */
@@ -59,7 +55,7 @@ class ResumeDownload
     {
         return $this->id;
     }
-    
+
     /**
      * @return \DateTime
      */
@@ -67,7 +63,7 @@ class ResumeDownload
     {
         return $this->downloadAt;
     }
-    
+
     /**
      * @return string
      */
@@ -75,5 +71,4 @@ class ResumeDownload
     {
         return $this->fromIp;
     }
-    
 }

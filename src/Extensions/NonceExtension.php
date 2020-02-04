@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ondra
- * Date: 03.01.18
- * Time: 22:21
- */
 
 declare(strict_types=1);
 
@@ -17,7 +11,7 @@ use Twig\TwigFunction;
 /**
  * Class NonceExtension
  * @package App\Extensions
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author Ondra Votava <ondra@votava.dev>
  */
 class NonceExtension extends AbstractExtension
 {
@@ -25,7 +19,7 @@ class NonceExtension extends AbstractExtension
      * @var NonceGeneratorInterface
      */
     private $nonceGenerator;
-    
+
     /**
      * NonceExtension constructor.
      *
@@ -35,7 +29,7 @@ class NonceExtension extends AbstractExtension
     {
         $this->nonceGenerator = $nonceGenerator;
     }
-    
+
     /**
      * @return array|TwigFunction[]
      */
@@ -45,7 +39,7 @@ class NonceExtension extends AbstractExtension
             new TwigFunction('nonce', [$this, 'getNonce']),
         ];
     }
-    
+
     /**
      * @return string
      */

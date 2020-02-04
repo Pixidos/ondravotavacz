@@ -1,14 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ondra Votava
- * Date: 19.12.17
- * Time: 7:22
- */
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -21,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SkillCategory
 {
-    
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -29,20 +26,20 @@ class SkillCategory
      * @var integer
      */
     private $id;
-    
+
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string", nullable=false)
      * @var string
      */
     private $category;
-    
+
     /**
-     * @ORM\OneToMany(targetEntity="Skill", mappedBy="category", cascade={"all"})
-     * @var Skill[]|\Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Skill", mappedBy="category", cascade={"all"}, indexBy="id")
+     * @var ArrayCollection<int,Skill>
      */
     private $skills;
-    
+
     /**
      * SkillCategory constructor.
      */
@@ -50,7 +47,7 @@ class SkillCategory
     {
         $this->skills = new ArrayCollection();
     }
-    
+
     /**
      * @return null|string
      */
@@ -58,7 +55,7 @@ class SkillCategory
     {
         return $this->category;
     }
-    
+
     /**
      * @return int|null
      */
@@ -66,7 +63,7 @@ class SkillCategory
     {
         return $this->id;
     }
-    
+
     /**
      * @return string|null
      */
@@ -74,7 +71,7 @@ class SkillCategory
     {
         return $this->category;
     }
-    
+
     /**
      * @param string $category
      *
@@ -83,45 +80,43 @@ class SkillCategory
     public function setCategory(string $category): SkillCategory
     {
         $this->category = $category;
-        
+
         return $this;
     }
-    
+
     /**
-     * @return Skill[]|ArrayCollection
+     * @return ArrayCollection<int,Skill>
      */
-    public function getSkills()
+    public function getSkills(): Collection
     {
         return $this->skills;
     }
-    
+
     /**
      * @param Skill $skill
      *
      * @return $this
      */
-    public function addSkill(Skill $skill)
+    public function addSkill(Skill $skill): self
     {
         if (!$this->skills->contains($skill)) {
             $this->skills[] = $skill;
         }
-        
+
         return $this;
     }
-    
+
     /**
      * @param Skill $skill
      *
      * @return $this
      */
-    public function removeSkill(Skill $skill)
+    public function removeSkill(Skill $skill): self
     {
         if ($this->skills->contains($skill)) {
             $this->skills->removeElement($skill);
         }
-        
+
         return $this;
     }
-    
-    
 }

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -8,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 /**
  * Class ExperienceRespository
  * @package App\Repository
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author Ondra Votava <ondra@votava.dev>
  */
 
 class ExperienceRespository
@@ -17,7 +19,7 @@ class ExperienceRespository
      * @var EntityManagerInterface entityManager
      */
     private $entityManager;
-    
+
     /**
      * ExperienceRespository constructor.
      *
@@ -27,9 +29,9 @@ class ExperienceRespository
     {
         $this->entityManager = $entityManager;
     }
-    
+
     /**
-     * @return array|Experience[]
+     * @return array<Experience>
      */
     public function getAll(): array
     {
@@ -40,7 +42,7 @@ class ExperienceRespository
            ->addOrderBy('toDateSort', 'DESC')
            ->addOrderBy('experience.toDate', 'DESC')
            ->addOrderBy('experience.fromDate', 'DESC');
-        
+
         return $qb->getQuery()->getResult();
     }
 }

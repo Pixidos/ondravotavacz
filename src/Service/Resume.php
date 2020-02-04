@@ -1,26 +1,29 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Service;
-
 
 use App\Configs\PdfConfig;
 use App\Data\Contact;
 use App\Entity\ResumeDownload;
+use App\Exceptions\RuntimeException;
 use App\Repository\CertificationRepository;
 use App\Repository\ExperienceRespository;
 use App\Repository\SkillCategoryRepository;
 use App\Repository\SocialLinkRepository;
-use App\Exceptions\RuntimeException;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Snappy\Pdf;
-use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Class Resume
  * @package App\Service
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author  Ondra Votava <ondra@votava.dev>
  */
 class Resume
 {
@@ -36,10 +39,6 @@ class Resume
      * @var Contact
      */
     private $contact;
-    /**
-     * @var TwigEngine
-     */
-    private $twigEngine;
     /**
      * @var Environment
      */
@@ -64,7 +63,7 @@ class Resume
      * @var EntityManagerInterface
      */
     private $entityManager;
-    
+
     /**
      * Resume constructor.
      *
@@ -88,7 +87,6 @@ class Resume
         Environment $twig,
         Pdf $pdf,
         PdfConfig $config
-    
     ) {
         $this->entityManager = $entityManager;
         $this->experienceRespository = $experienceRespository;
@@ -100,17 +98,19 @@ class Resume
         $this->certificationRepository = $certificationRepository;
         $this->config = $config;
     }
-    
+
+
     /**
-     * @throws \App\Exceptions\RuntimeException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @return void
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function regenerate(): void
     {
         $html = $this->twig->render(
-            'resume.html.twig', [
+            'resume.html.twig',
+            [
                 'experiences' => $this->experienceRespository->getAll(),
                 'skillCategories' => $this->categoryRepository->getAllWithSkills(),
                 'socialLinks' => $this->linkRepository->getAll(),
@@ -118,7 +118,7 @@ class Resume
                 'certifications' => $this->certificationRepository->getAll(),
             ]
         );
-        
+
         $content = $this->pdf->getOutputFromHtml(
             $html,
             [
@@ -127,24 +127,23 @@ class Resume
                 'page-size' => 'A4',
             ]
         );
-    
-        if (!$file = fopen($this->config->getOutput(), 'wb')) {
+
+        $file = fopen($this->config->getOutput(), 'wb');
+        if ($file === false) {
             throw new RuntimeException(sprintf('Cant write to file: "%s"', $this->config->getOutput()));
         }
-    
+
         fwrite($file, $content);
         fclose($file);
-        
     }
-    
+
     /**
      * @param Request $request
      *
      * @return string
-     * @throws \App\Exceptions\RuntimeException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getFileContent(Request $request): string
     {
@@ -155,14 +154,12 @@ class Resume
         if (!file_exists($path) || !is_readable($path)) {
             throw new RuntimeException('Pdf with CV is not readable');
         }
-    
+
         $ip = $request->getClientIp() ?? '0.0.0.0';
         $download = new ResumeDownload($ip);
         $this->entityManager->persist($download);
         $this->entityManager->flush();
-        
-        return file_get_contents($path);
+
+        return (string)file_get_contents($path);
     }
-    
-    
 }

@@ -1,19 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ondra
- * Date: 03.01.18
- * Time: 22:13
- */
+
+declare(strict_types=1);
 
 namespace App\Security;
 
-
+/**
+ * Interface NonceGeneratorInterface
+ * @package App\Security
+ */
 interface NonceGeneratorInterface
 {
     /**
      * @return string
      */
-    public function getNonce(): string ;
-    
+    public function getNonce(): string;
 }

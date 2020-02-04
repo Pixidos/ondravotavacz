@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Service;
 
@@ -9,18 +11,20 @@ use App\Repository\ExperienceRespository;
 use App\Repository\SkillCategoryRepository;
 use App\Repository\SocialLinkRepository;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
 /**
  * Class AboutMe
  * @package App\Service
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author  Ondra Votava <ondra@votava.dev>
  */
 class AboutMe
 {
     /**
      * @var ExperienceRespository
      */
-    private $experienceRespository;
+    private $experienceRepository;
     /**
      * @var SkillCategoryRepository
      */
@@ -41,7 +45,7 @@ class AboutMe
      * @var FormFactoryInterface
      */
     private $formFactory;
-    
+
     /**
      * AboutMe constructor.
      *
@@ -60,22 +64,29 @@ class AboutMe
         CertificationRepository $certificationRepository,
         FormFactoryInterface $formFactory
     ) {
-        $this->experienceRespository = $experienceRespository;
+        $this->experienceRepository = $experienceRespository;
         $this->categoryRepository = $categoryRepository;
         $this->linkRepository = $linkRepository;
         $this->contact = $contact;
         $this->certificationRepository = $certificationRepository;
         $this->formFactory = $formFactory;
     }
-    
+
     /**
-     * @return array
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @return array{
+     *              experiences: array<\App\Entity\Experience>,
+     *              skillCategories: array<\App\Entity\SkillCategory>,
+     *              socialLinks: array<\App\Entity\SocialLink>,
+     *              contact: \App\Data\Contact,
+     *              certifications: array<\App\Entity\Certification>,
+     *              form: \Symfony\Component\Form\FormView
+     *          }
+     * @throws InvalidOptionsException
      */
     public function getData(): array
     {
         return [
-            'experiences' => $this->experienceRespository->getAll(),
+            'experiences' => $this->experienceRepository->getAll(),
             'skillCategories' => $this->categoryRepository->getAllWithSkills(),
             'socialLinks' => $this->linkRepository->getAll(),
             'contact' => $this->contact,
@@ -83,19 +94,20 @@ class AboutMe
             'form' => $this->creteContactFrom()->createView(),
         ];
     }
-    
+
     /**
-     * @return \Symfony\Component\Form\FormInterface
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @return FormInterface
+     * @throws InvalidOptionsException
      */
-    private function creteContactFrom(): \Symfony\Component\Form\FormInterface
+    private function creteContactFrom(): FormInterface
     {
         return $this->formFactory->create(
-            ContactForm::class, null, [
+            ContactForm::class,
+            null,
+            [
                 'method' => 'post',
                 'action' => '/',
             ]
         );
     }
-    
 }

@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ondra
- * Date: 27.12.17
- * Time: 16:07
- */
+
+declare(strict_types=1);
 
 namespace App\Service;
-
 
 use App\Configs\MailConfig;
 use Swift_Mailer;
@@ -23,19 +18,19 @@ class SendMail
      * @var MailConfig
      */
     private $config;
-    
+
     /**
      * SendMail constructor.
      *
      * @param Swift_Mailer $mailer
-     * @param MailConfig    $config
+     * @param MailConfig   $config
      */
-    public function __construct(Swift_Mailer $mailer, MailConfig $config )
+    public function __construct(Swift_Mailer $mailer, MailConfig $config)
     {
         $this->mailer = $mailer;
         $this->config = $config;
     }
-    
+
     /**
      * @param string $from
      * @param string $subject
@@ -53,7 +48,7 @@ class SendMail
             ->setTo($this->config->getToMail())
             ->setFrom($this->config->getFromMail())
             ->setReplyTo($from);
-    
+
         return (bool)$this->mailer->send($swiftMessage);
     }
 }

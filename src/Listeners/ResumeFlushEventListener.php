@@ -1,7 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Listeners;
-
 
 use App\Configs\PdfConfig;
 use App\Data\Contact;
@@ -17,7 +18,7 @@ use Twig\Environment;
 /**
  * Class ResumeFlushEventListener
  * @package App\Subscribers
- * @author Ondra Votava <me@ondravotava.cz>
+ * @author Ondra Votava <ondra@votava.dev>
  */
 class ResumeFlushEventListener
 {
@@ -49,7 +50,7 @@ class ResumeFlushEventListener
      * @var Environment
      */
     private $twig;
-    
+
     /**
      * ResumeFlushEventListener constructor.
      *
@@ -72,7 +73,7 @@ class ResumeFlushEventListener
         $this->contact = $contact;
         $this->twig = $twig;
     }
-    
+
     /**
      * @param Resume $resume
      */
@@ -80,29 +81,28 @@ class ResumeFlushEventListener
     {
         $this->resume = $resume;
     }
-    
-    
+
+
     /**
      * @param OnFlushEventArgs $eventArgs
      */
     public function onFlush(OnFlushEventArgs $eventArgs): void
     {
         $uow = $eventArgs->getEntityManager()->getUnitOfWork();
-        
+
         foreach ($uow->getScheduledEntityInsertions() as $entity) {
             $this->checkEntity($entity);
         }
-        
+
         foreach ($uow->getScheduledEntityUpdates() as $entity) {
             $this->checkEntity($entity);
         }
-        
+
         foreach ($uow->getScheduledEntityDeletions() as $entity) {
             $this->checkEntity($entity);
         }
-        
     }
-    
+
     /**
      * @param PostFlushEventArgs $eventArgs
      *
@@ -131,7 +131,7 @@ class ResumeFlushEventListener
             $this->rebuildResume = false;
         }
     }
-    
+
     /**
      * @param object $entity
      */
