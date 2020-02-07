@@ -10,6 +10,7 @@ framework:
         handler_id: ~
         cookie_secure: '%cockie_secured%'
         cookie_samesite: 'strict'
+        name: '__Secure-PHPSESSID'
 
     #esi: ~
     #fragments: ~

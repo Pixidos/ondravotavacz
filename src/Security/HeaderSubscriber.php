@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * @package App\Security
  * @author  Ondra Votava <ondra@votava.dev>
  */
-class NonceSubscriber implements EventSubscriberInterface
+class HeaderSubscriber implements EventSubscriberInterface
 {
     /**
      * @var NonceGeneratorInterface
@@ -61,7 +61,7 @@ class NonceSubscriber implements EventSubscriberInterface
         $cspHeader .= "form-action 'self'; ";
         // Uri
         $cspHeader .= "base-uri 'none';"
-            . 'report-uri https://738b3fb6c6a6dae7e767ff601d34b671.report-uri.io/r/default/csp/enforce;';
+            . 'report-uri https://votava.report-uri.com/r/d/csp/enforce;';
         // set CPS header on the response object
         $response->headers->set('Content-Security-Policy', $cspHeader);
         $response->headers->set(
@@ -72,9 +72,14 @@ class NonceSubscriber implements EventSubscriberInterface
         $response->headers->set('X-XSS-Protection', '1; mode=block');
         $response->headers->set('X-Powered-By', 'Ondra Votava code');
         $response->headers->set('Vary', 'X-Requested-With');
-
-        $content = $response->getContent();
-
+        $response->headers->set(
+            'Report-To',
+            '{"group":"default","max_age":31536000,"endpoints":[{"url":"https://votava.report-uri.com/a/d/g"}],"include_subdomains":true}' //phpcs:ignore
+        );
+        $response->headers->set(
+            'NEL',
+            '{"report_to":"default","max_age":31536000,"include_subdomains":true}'
+        );
     }
 
     /**
