@@ -3,7 +3,7 @@
 {% block body %}
 
 
-    <div style="margin: auto; max-width: 600px">
+    <div class="login-form">
         <div class="contact card">
             {% if error %}
                 <div class="alert alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

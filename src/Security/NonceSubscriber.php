@@ -72,6 +72,9 @@ class NonceSubscriber implements EventSubscriberInterface
         $response->headers->set('X-XSS-Protection', '1; mode=block');
         $response->headers->set('X-Powered-By', 'Ondra Votava code');
         $response->headers->set('Vary', 'X-Requested-With');
+
+        $content = $response->getContent();
+
     }
 
     /**
