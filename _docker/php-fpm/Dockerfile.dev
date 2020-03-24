@@ -1,0 +1,6 @@
+FROM docker.mediafactory.cz/php:7.4-fpm-buster-dev
+
+
+apt-get install python3.7 python3-pip
+
+pip3 install Sphinx==1.8.5 sphinx_rtd_theme==0.4.3 sphinxcontrib-redoc sphinxcontrib-openapi

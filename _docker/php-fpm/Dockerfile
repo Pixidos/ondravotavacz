@@ -64,6 +64,6 @@ RUN rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime \
     && "date"
 
-WORKDIR /var/www/symfony
+WORKDIR /var/www/html
 
 EXPOSE 9000

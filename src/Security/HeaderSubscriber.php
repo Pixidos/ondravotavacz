@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -19,15 +20,21 @@ class HeaderSubscriber implements EventSubscriberInterface
      * @var NonceGeneratorInterface
      */
     private $nonceGenerator;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
     /**
      * NonceSubscriber constructor.
      *
      * @param NonceGeneratorInterface $nonceGenerator
+     * @param LoggerInterface         $logger
      */
-    public function __construct(NonceGeneratorInterface $nonceGenerator)
+    public function __construct(NonceGeneratorInterface $nonceGenerator, LoggerInterface $logger)
     {
         $this->nonceGenerator = $nonceGenerator;
+        $this->logger = $logger;
     }
 
     /**
@@ -66,7 +73,7 @@ class HeaderSubscriber implements EventSubscriberInterface
         $response->headers->set('Content-Security-Policy', $cspHeader);
         $response->headers->set(
             'Feature-Policy',
-            "vibrate 'self'; usermedia *; sync-xhr 'self' https://ondra.votava.it"
+            "accelerometer 'none'; camera 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; usb 'none'" //phpcs:ignore
         );
         // add other headers -> @TODO: make configable
         $response->headers->set('X-XSS-Protection', '1; mode=block');

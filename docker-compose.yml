@@ -12,30 +12,35 @@ services:
             MYSQL_USER: symfony
             MYSQL_PASSWORD: symfony
     php:
-        build: ./_docker/php-fpm
-        #image: php:7.3-fpm
+        #build: ./_docker/php-fpm
+        image: docker.mediafactory.cz/php:7.4-fpm-buster-dev
         container_name: ov_php
+        environment:
+            XDEBUG_CONFIG: "remote_host=host.docker.internal remote_port=9001 servername=ondravotava.test"
         ports:
             - "9000:9000"
         volumes:
             - ./:/var/www/html:cached
+            - ./_docker/php-fpm/php.d/xx-custom-php.ini:/usr/local/etc/php/conf.d/xx-custom-php.ini
         depends_on:
             - db
         links:
             - db
-        extra_hosts:
-            - "ondravotava.test:172.20.0.4" #ip addr is nginx add can be changed
+#        extra_hosts:
+#            - "ondravotava.test:172.20.0.4" #ip addr is nginx add can be changed
 
     nginx:
         image: nginx:alpine
         ports:
             - "80:80"
+            - "443:443"
         links:
             - php
         volumes:
             - ./_docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
             - ./_docker/nginx/symfony.conf:/etc/nginx/sites-enabled/default:ro
             - ./:/var/www/html:cached
+            - ./_docker/nginx/ssl:/var/www/ssl:ro
 
 volumes:
   ovsql_volume:
